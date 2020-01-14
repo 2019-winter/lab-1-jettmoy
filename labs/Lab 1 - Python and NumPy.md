@@ -13,8 +13,8 @@ jupyter:
     name: python3
 ---
 
-# Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+# Jett
+Jett Moy
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -46,46 +46,88 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+
+a = np.full((6, 4), 2)
+print(a)
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.ones((6,4)) + np.eye(6, 4) * 2
+print(b)
 ```
 
 ## Exercise 3
 
+
+The number of columns of matrix A must match the number of rows of matrix B. Using the * operator performs element-wise multiplication
+and the dot function performs matrix multiplication. 
+
 ```python
-# YOUR SOLUTION HERE
+a = np.full((6, 4), 2)
+b = np.ones((6,4)) + np.eye(6, 4) * 2
+c = a*b
+print(c)
+# d = np.dot(a, b)
 ```
 
 ## Exercise 4
 
+
+The shape of the resulting array from matrix multiplication depends on the length of the rows of the first matrix and the length of the
+columns of the second matrix. Transposing A produces a 4x4 matrix and transposing B produces a 6x6 matrix. 
+
 ```python
-# YOUR SOLUTION HERE
+a = np.full((6, 4), 2)
+b = np.ones((6,4)) + np.eye(6, 4) * 2
+print(np.dot(a.transpose(), b))
+print(np.dot(a, b.transpose()))
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def func():
+    print('some output')
+    
+func()
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+def arrstats(arr):
+    print(arr.mean())
+    print(arr.sum())
+
+arr = np.random.rand(3, 2)
+arrstats(arr)
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+def countOnes(array):
+    count = 0
+    for x in np.nditer(array):
+        if (x == 1):
+            count += 1
+    return count
+            
+print(np.eye(4))
+print(countOnes(np.eye(4)))
+```
+
+```python
+def where(cond):
+    iterator = np.nditer(cond, flags=['multi_index'])
+    for x in iterator:
+        if x: 
+            print(iterator.multi_index)
+                
+where(np.eye(4) < 1)
 ```
 
 ## Excercises 8-???
@@ -96,28 +138,39 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+import pandas as pd
+
+a = pd.DataFrame(np.full((6,4), 2))
+print(a)
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+b = pd.DataFrame(np.ones((6,4)) + np.eye(6, 4) * 2)
+print(b)
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+a*b
+# a.dot(b)
+# matrices not aligned error, different shapes
 ```
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+def countOnes(dataframe):
+    return dataframe.where(dataframe==1, 0).sum().sum()
+
+df = pd.DataFrame(np.eye(4))
+print(df)
+print(countOnes(df))
 ```
 
 ## Exercises 12-14
@@ -137,22 +190,23 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.name
+titanic_df['name']
 ```
 
 ## Exercise 13
 After setting the index to ``sex``, how do you select all passengers that are ``female``? And how many female passengers are there?
 
 ```python
-## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+titanic_df.loc["female"]
 ```
 
 ## Exercise 14
 How do you reset the index?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.reset_index()
 ```
 
 ```python
